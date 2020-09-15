@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XAU</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+  <a href="javascript:xau();">Текущая цена за 1кг золота</a>
+  <script>
+    function xau() {
+      const url = 'https://openexchangerates.org/api/latest.json';
+      const data = {
+        app_id: '269168c2035142f4bf41a79f35118c27'
+      };
+
+      $.ajax({
+        url: url,
+        dataType: 'json',
+        data: data,
+        success: answer => {
+          let result = 1 / answer.rates.XAU;//цена за тройскую унцию
+          result *= 1000/31,1034768 ;//цена за кг
+          alert('Текущая цена за 1кг золота: ' + result.toFixed(2) + '$');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
